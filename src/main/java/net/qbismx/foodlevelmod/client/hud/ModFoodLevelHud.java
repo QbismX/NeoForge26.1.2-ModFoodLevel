@@ -1,9 +1,7 @@
 package net.qbismx.foodlevelmod.client.hud;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
@@ -23,6 +21,12 @@ public final class ModFoodLevelHud {
 
     @SubscribeEvent
     public static void FoodLevelHud(RenderGuiLayerEvent.Post event){
+
+        if (!VanillaGuiLayers.PLAYER_HEALTH.equals(event.getName())) {
+            return;
+        }
+
+
         Minecraft mc = Minecraft.getInstance();
 
         if (mc.player == null || mc.options.hideGui) {
@@ -42,7 +46,7 @@ public final class ModFoodLevelHud {
 
         // 文字の視認性を高めるための背景用の処理
         int padding = 4;
-        int textWidth = mc.font.width("MP : 00020 / 00020");
+        int textWidth = mc.font.width("                  ");
         int lineHeight = mc.font.lineHeight + 2;
         int textHeight = lineHeight - 2;
 
@@ -54,16 +58,10 @@ public final class ModFoodLevelHud {
         int bgRight = backgroundX + textWidth + padding;
         int bgBottom = backgroundY + textHeight + padding;
 
-
-        // RenderSystemもちょっと変更されている。透過処理はどうするの？
-        // 0xAARRGGBB。先頭の 80 が透明度、000000 が黒
         guiGraphics.fill(bgLeft, bgTop, bgRight, bgBottom, 0x80000000);
 
-
         guiGraphics.text(mc.font, Component.literal(foodlevel), backgroundX, backgroundY, 0xFFFFFFFF, true);
-        //guiGraphics.text(mc.font, Component.literal(line2), backgroundX, backgroundY + lineHeight, 0xFFFFFFFF, true);
-        //guiGraphics.text(mc.font, Component.literal(line3), backgroundX, backgroundY + lineHeight * 2, 0xFFFFFFFF, true);
-        //guiGraphics.text(mc.font, Component.literal(line4), backgroundX, backgroundY + lineHeight * 3, 0xFFFFFFFF, true);
+
     }
 
     // 取り除く用
@@ -72,10 +70,9 @@ public final class ModFoodLevelHud {
 
         Identifier name = event.getName();
 
-        if (VanillaGuiLayers.FOOD_LEVEL == name) {
+        if (VanillaGuiLayers.FOOD_LEVEL.equals(name)) {
             event.setCanceled(true); // バニラの満腹度表示を消す
         }
 
     }
-
 }
