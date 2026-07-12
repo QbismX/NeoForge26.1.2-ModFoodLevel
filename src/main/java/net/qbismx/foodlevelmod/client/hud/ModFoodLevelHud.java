@@ -40,9 +40,9 @@ public final class ModFoodLevelHud {
         int maxmp = 20 + moddata.maxExtraFood();
 
         String foodlevel = "MP : " + mp + " / " + maxmp;
-        //String line2 = "Extra Food   : " ;
-        //String line3 = "Max Extra    : " + moddata.maxExtraFood();
-        //String line4 = "Last Vanilla : " + moddata.lastVanillaFood();
+        String line2 = "Extra Food   : " + moddata.extraFood();
+        String line3 = "Max Extra    : " + moddata.maxExtraFood();
+        String line4 = "Last Vanilla : " + moddata.lastVanillaFood();
 
         // 文字の視認性を高めるための背景用の処理
         int padding = 4;
@@ -61,6 +61,9 @@ public final class ModFoodLevelHud {
         guiGraphics.fill(bgLeft, bgTop, bgRight, bgBottom, 0x80000000);
 
         guiGraphics.text(mc.font, Component.literal(foodlevel), backgroundX, backgroundY, 0xFFFFFFFF, true);
+        guiGraphics.text(mc.font, Component.literal(line2), backgroundX, backgroundY - textHeight, 0xFFFFFFFF, true);
+        guiGraphics.text(mc.font, Component.literal(line3), backgroundX, backgroundY -  2 * textHeight, 0xFFFFFFFF, true);
+        guiGraphics.text(mc.font, Component.literal(line4), backgroundX, backgroundY - 3 * textHeight, 0xFFFFFFFF, true);
 
     }
 
@@ -70,9 +73,9 @@ public final class ModFoodLevelHud {
 
         Identifier name = event.getName();
 
-        if (VanillaGuiLayers.FOOD_LEVEL.equals(name)) {
-            event.setCanceled(true); // バニラの満腹度表示を消す
-        }
+        //if (VanillaGuiLayers.FOOD_LEVEL.equals(name)) {
+            //event.setCanceled(true); // バニラの満腹度表示を消す
+        //}
 
     }
 }
