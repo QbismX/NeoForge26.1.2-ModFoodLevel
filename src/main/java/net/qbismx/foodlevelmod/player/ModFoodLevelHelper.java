@@ -15,9 +15,14 @@ public final class ModFoodLevelHelper {
         ModFoodLevelData extra_data = player.getData(ModAttachments.EXTRA_FOOD.get());
         int currentFood = foodData.getFoodLevel(); // バニラのFoodレベル
         int lastFood = extra_data.lastVanillaFood(); // 前回処理したFoodレベル
+        int extraFood = extra_data.extraFood();
+        int maxExtraFood = extra_data.maxExtraFood();
 
-        if (currentFood != lastFood) { // バニラのFoodレベルに変化があった場合(おなかがすいた or 何か食べた)
-            int modFood = extra_data.extraFood() + currentFood; // 見かけ上のFoodレベル
+        // 基準値を越えているけど、extra_foodがMaxではない場合 or 基準値は越えていないけど、extra_foodに余りがある場合
+        boolean safety_condition = (extraFood < maxExtraFood && CONTROL_FOOD < currentFood) || (0 < extraFood && currentFood < CONTROL_FOOD);
+
+        if ((currentFood != lastFood) || safety_condition) { // バニラのFoodレベルに変化があった場合(おなかがすいた or 何か食べた)
+            int modFood = extraFood + currentFood; // 見かけ上のFoodレベル
 
             if (modFood < CONTROL_FOOD) { // 見かけ x < 8
 
@@ -25,7 +30,7 @@ public final class ModFoodLevelHelper {
                 extra_data = extra_data.withExtraFood(0); // 追加用Foodレベルは0
                 syncVanillaFood(player);
 
-            } else if (modFood <= CONTROL_FOOD + extra_data.maxExtraFood()) { // 見かけ：8 <= x <= 8 + 追加Foodレベルの最大値
+            } else if (modFood <= CONTROL_FOOD + maxExtraFood) { // 見かけ：8 <= x <= 8 + 追加Foodレベルの最大値
 
                 foodData.setFoodLevel(CONTROL_FOOD); // バニラのFoodレベルは基準値の8
                 extra_data = extra_data.withExtraFood(modFood - 8); // 余った分は追加用のFoodレベルにたくわえる
@@ -33,7 +38,6 @@ public final class ModFoodLevelHelper {
 
             } else { // 見かけ: 8 + 追加Foodレベルの最大値 < x
 
-                int maxExtraFood = extra_data.maxExtraFood();
                 foodData.setFoodLevel(modFood - maxExtraFood);
                 extra_data = extra_data.withExtraFood(maxExtraFood);
                 syncVanillaFood(player);
