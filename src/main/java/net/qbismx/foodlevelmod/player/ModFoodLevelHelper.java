@@ -12,7 +12,7 @@ public final class ModFoodLevelHelper {
     // 以下のような関数をベースに設計する：第1成分(バニラのFoodレベル)と第2成分(追加Foodレベル)の和が見かけ上のFoodレベルとなる
     // t (modFood) = (modFood, 0)                                   if modFood < 8
     // t (modFood) = (8, modFood - 8)                               if 8 <= modFood <= 8 + (ExtraFoodの最大値)
-    // t (modFood) = (ExtraFoodの最大値 - modFood, ExtraFoodの最大値)  otherwise
+    // t (modFood) = (modFood - ExtraFoodの最大値, ExtraFoodの最大値)  otherwise
 
     // 時間経過で満腹度が減った時、コマンドで満腹度が回復したとき、コマンドで満腹度セットがなされた時など用
     public static void serverTick(ServerPlayer player) {
