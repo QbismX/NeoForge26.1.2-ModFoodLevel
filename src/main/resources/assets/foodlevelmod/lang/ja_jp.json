@@ -1,0 +1,6 @@
+{
+  "hud.foodlevelmod.mp" : "満腹度",
+  "hud.foodlevelmod.extra_food" : "追加満腹度",
+  "hud.foodlevelmod.max_extra_food" : "追加満腹度の最大値",
+  "hud.foodlevelmod.last_vanilla_food" : "直前の既存満腹度"
+}

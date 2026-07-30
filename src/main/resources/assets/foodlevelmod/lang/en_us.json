@@ -1,0 +1,6 @@
+{
+  "hud.foodlevelmod.mp" : "MP",
+  "hud.foodlevelmod.extra_food" : "Extra Food",
+  "hud.foodlevelmod.max_extra_food" : "Max Extra Food",
+  "hud.foodlevelmod.last_vanilla_food" : "Last Vanilla Food"
+}

@@ -39,31 +39,32 @@ public final class ModFoodLevelHud {
         int mp = mc.player.getFoodData().getFoodLevel() + moddata.extraFood();
         int maxmp = 20 + moddata.maxExtraFood();
 
-        String foodlevel = "MP : " + mp + " / " + maxmp;
-        String line2 = "Extra Food   : " + moddata.extraFood();
-        String line3 = "Max Extra    : " + moddata.maxExtraFood();
-        String line4 = "Last Vanilla : " + moddata.lastVanillaFood();
+
+        String foodlevel = " : " + mp + " / " + maxmp;
+        String line2 = " : " + moddata.extraFood();
+        String line3 = " : " + moddata.maxExtraFood();
+        String line4 = " : " + moddata.lastVanillaFood();
 
         // 文字の視認性を高めるための背景用の処理
         int padding = 4;
-        int textWidth = mc.font.width("                  ");
+        int textWidth = mc.font.width("                         ");
         int lineHeight = mc.font.lineHeight + 2;
         int textHeight = lineHeight - 2;
 
         int backgroundX = guiGraphics.guiWidth() - textWidth - 10;
-        int backgroundY = guiGraphics.guiHeight() - textHeight - 30;
+        int backgroundY = guiGraphics.guiHeight() - (textHeight * 4) - 30;
 
         int bgLeft = backgroundX - padding;
         int bgTop = backgroundY - padding;
         int bgRight = backgroundX + textWidth + padding;
-        int bgBottom = backgroundY + textHeight + padding;
+        int bgBottom = backgroundY + (textHeight * 4) + padding;
 
         guiGraphics.fill(bgLeft, bgTop, bgRight, bgBottom, 0x80000000);
 
-        guiGraphics.text(mc.font, Component.literal(foodlevel), backgroundX, backgroundY, 0xFFFFFFFF, true);
-        guiGraphics.text(mc.font, Component.literal(line2), backgroundX, backgroundY - textHeight, 0xFFFFFFFF, true);
-        guiGraphics.text(mc.font, Component.literal(line3), backgroundX, backgroundY -  2 * textHeight, 0xFFFFFFFF, true);
-        guiGraphics.text(mc.font, Component.literal(line4), backgroundX, backgroundY - 3 * textHeight, 0xFFFFFFFF, true);
+        guiGraphics.text(mc.font, Component.translatable("hud.foodlevelmod.mp").append(foodlevel), backgroundX, backgroundY, 0xFFFFFFFF, true);
+        guiGraphics.text(mc.font, Component.translatable("hud.foodlevelmod.extra_food").append(line2), backgroundX, backgroundY - textHeight, 0xFFFFFFFF, true);
+        guiGraphics.text(mc.font, Component.translatable("hud.foodlevelmod.max_extra_food").append(line3), backgroundX, backgroundY -  2 * textHeight, 0xFFFFFFFF, true);
+        guiGraphics.text(mc.font, Component.translatable("hud.foodlevelmod.last_vanilla_food").append(line4), backgroundX, backgroundY - 3 * textHeight, 0xFFFFFFFF, true);
 
     }
 
