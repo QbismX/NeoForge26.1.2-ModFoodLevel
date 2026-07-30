@@ -62,9 +62,9 @@ public final class ModFoodLevelHud {
         guiGraphics.fill(bgLeft, bgTop, bgRight, bgBottom, 0x80000000);
 
         guiGraphics.text(mc.font, Component.translatable("hud.foodlevelmod.mp").append(foodlevel), backgroundX, backgroundY, 0xFFFFFFFF, true);
-        guiGraphics.text(mc.font, Component.translatable("hud.foodlevelmod.extra_food").append(line2), backgroundX, backgroundY - textHeight, 0xFFFFFFFF, true);
-        guiGraphics.text(mc.font, Component.translatable("hud.foodlevelmod.max_extra_food").append(line3), backgroundX, backgroundY -  2 * textHeight, 0xFFFFFFFF, true);
-        guiGraphics.text(mc.font, Component.translatable("hud.foodlevelmod.last_vanilla_food").append(line4), backgroundX, backgroundY - 3 * textHeight, 0xFFFFFFFF, true);
+        guiGraphics.text(mc.font, Component.translatable("hud.foodlevelmod.extra_food").append(line2), backgroundX, backgroundY + textHeight, 0xFFFFFFFF, true);
+        guiGraphics.text(mc.font, Component.translatable("hud.foodlevelmod.max_extra_food").append(line3), backgroundX, backgroundY +  2 * textHeight, 0xFFFFFFFF, true);
+        guiGraphics.text(mc.font, Component.translatable("hud.foodlevelmod.last_vanilla_food").append(line4), backgroundX, backgroundY + 3 * textHeight, 0xFFFFFFFF, true);
 
     }
 
